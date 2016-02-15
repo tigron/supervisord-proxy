@@ -38,6 +38,10 @@ contain exactly one job, and the filename should be <jobname>.conf.
 Additionally, at least the logtail interface should be available over
 TCP, the actual XML-RPC interface can be the default UNIX socket.
 
+Since this uses IDENT to identify users, you obviously need to trust
+the machine which answers your IDENT request. This will not work on
+an untrusted network.
+
 ## TODO
 
 * Extend supervisord's XML-RPC interface to return the UNIX username 
