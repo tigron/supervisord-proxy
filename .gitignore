@@ -1,0 +1,7 @@
+.environment.php
+tmp/twig/*
+tmp/log/*
+tmp/languages/*
+lib/external/packages/*
+lib/external/assets/*
+util/tmp/*
