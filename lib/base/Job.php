@@ -32,7 +32,7 @@ class Job {
 			$jobname = substr($filename, 0, strlen($filename) - 5);
 			$content = file(self::$supervisord_confd . '/' . $filename);
 			$line = array_filter($content, function($item) {
-				return preg_match('/^user=/', $item);
+				return preg_match('/^user\s*=\s*/', $item);
 			});
 
 			if (count($line) <> 1) {
@@ -40,7 +40,9 @@ class Job {
 				continue;
 			}
 
-			$user = trim(substr(array_pop($line), 5));
+			$line = array_pop($line);
+			preg_match('/^user\s*=\s*([0-9,a-z,A-Z]+)/', $line, $output);
+			$user = $output[1];
 
 			$jobs[] = [
 				'name' => $jobname,
@@ -64,6 +66,7 @@ class Job {
 
 	public static function is_job_from_user($jobname, $user) {
 		$jobs = self::get_all();
+
 		foreach ($jobs as $key => $job) {
 			if ($job['user'] === $user and $job['name'] === $jobname) {
 				return true;
