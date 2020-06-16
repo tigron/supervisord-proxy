@@ -42,14 +42,8 @@ class Bootstrap {
 		 * Register the autoloader
 		 */
 		$autoloader = new \Skeleton\Core\Autoloader();
-		$autoloader->add_include_path($root_path . '/lib/model/');
 		$autoloader->add_include_path($root_path . '/lib/base/');
 		$autoloader->register();
-
-		/**
-		 * Initialize the database
-		 */
-		//$database = \Skeleton\Database\Database::get($config->database, true);
 
 		/**
 		 * Initialize the application directory
@@ -61,17 +55,5 @@ class Bootstrap {
 		 */
 		\Skeleton\Error\Config::$debug = true;
 		\Skeleton\Error\Handler::enable();
-
-		/**
-		 * Initialize the translations
-		 */
-		\Skeleton\I18n\Config::$language_interface = 'Language';
-		\Skeleton\I18n\Config::$po_directory = $root_path . '/po/';
-		\Skeleton\I18n\Config::$cache_directory = $root_path . '/tmp/languages/';
-
-		/**
-		 * Initialize the template caching path
-		 */
-		\Skeleton\Template\Twig\Config::$cache_directory = $root_path . '/tmp/twig/';
 	}
 }
